@@ -1,13 +1,18 @@
 import pygame, sys
 from pygame.locals import *
 pygame.init()
-DISPLAYSURF = pygame.display.set_mode((400, 300)) 
+display_width = 800
+display_height = 600
+
+gameDisplay = pygame.display.set_mode((display_width, display_height)) 
 pygame.display.set_caption('Adventure Doors')
-while True: # main game loop
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+white = (255,255,255)
+black = (0,0,0)
+
+def text_objects(text, font):
+        textSurface = font.render(text, True, black)
+        return textSurface,textSurface.get_rect()
+    
 def game_intro():
 
     intro = True
@@ -18,4 +23,17 @@ def game_intro():
                 pygame.quit()
                 quit()
         gameDisplay.fill(white)
-        largeText = pygame.font,Font ('freesansbold.ttf',115)
+        mediumText = pygame.font.SysFont("monospace", 20)
+        largeText = pygame.font.SysFont("monospace", 20)
+        TextSurf, TextRect = text_objects("Adventure Doors", largeText)
+        TextSurf, TextRect = text_objects("Enter if you dare..." ,mediumText)
+        TextRect.center = ((display_width/2),(display_height/2))
+        gameDisplay.blit(TextSurf, TextRect)
+
+
+game_intro()
+while True: # main game loop
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
